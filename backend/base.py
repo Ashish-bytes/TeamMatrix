@@ -4,6 +4,7 @@ import quiz
 import generativeResources
 import translate
 from flask_cors import CORS
+import os
 
 api = Flask(__name__)
 CORS(api)
@@ -46,27 +47,43 @@ def get_translations():
     text = req.get("textArr")
     toLang = req.get("toLang")
 
-    print(f"Translating to {toLang}: { text}")
-    translated_text = translate.translate_text_arr(text_arr=text, target=toLang)
+    print(f"Translating to {toLang}: {text}")
+    translated_text = translate.translate_text_arr(
+        text_arr=text,
+        target=toLang
+    )
+
     return translated_text
 
 
 @api.route("/api/generate-resource", methods=["POST"])
 def generative_resource():
     req = request.get_json()
+
     req_data = {
         "course": False,
         "knowledge_level": False,
         "description": False,
         "time": False,
     }
+
     for key in req_data.keys():
         req_data[key] = req.get(key)
+
         if not req_data[key]:
             return "Required Fields not provided", 400
+
     print(f"generative resources for {req_data['course']}")
+
     resources = generativeResources.generate_resources(**req_data)
+
     return resources
 
+
 if __name__ == "__main__":
-    api.run(port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    api.run(
+        host="0.0.0.0",
+        port=port,
+        debug=False
+    )

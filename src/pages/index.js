@@ -3,4 +3,9 @@ import RoadmapPage from "./roadmap/roadmap";
 import TopicPage from "./input/topic";
 import ProfilePage from "./profile/profile";
 
-export { QuizPage, RoadmapPage, TopicPage, ProfilePage };
+export {
+  QuizPage,
+  RoadmapPage,
+  TopicPage,
+  ProfilePage,
+};

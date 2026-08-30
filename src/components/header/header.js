@@ -1,42 +1,16 @@
 import { NavLink } from "react-router-dom";
 import "./header.css";
 import { CircleUser, Home } from "lucide-react";
-import { translateLocalStorage } from "../../translate/translate";
 
 const Header = () => {
-  const handleTranslate = async () => {
-  const currentLanguage =
-    localStorage.getItem("language") || "English";
-
-  const newLanguage =
-    currentLanguage === "English" ? "Hindi" : "English";
-
-  try {
-    await translateLocalStorage("roadmaps", newLanguage);
-
-    localStorage.setItem("language", newLanguage);
-
-    window.location.reload();
-  } catch (error) {
-    console.error("Translation failed:", error);
-  }
-};
-
   return (
     <header>
       <img
         src="logo.png"
-        alt="LearnX"
+        alt="TeamMatrix"
         height={40}
         className="logo"
       />
-
-      <button
-        className="languageButton"
-        onClick={handleTranslate}
-      >
-        हिंदी / English
-      </button>
 
       <NavLink to="/" className="Home">
         <Home

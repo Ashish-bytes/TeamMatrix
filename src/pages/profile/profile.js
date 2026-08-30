@@ -10,6 +10,11 @@ import {
   Target,
   Bot,
   TrendingUp,
+  Flame,
+  Clock3,
+  Brain,
+  Play,
+  Trophy,
 } from "lucide-react";
 
 import {
@@ -31,54 +36,272 @@ ChartJS.register(
   Legend
 );
 
-
 /* =========================
-   STATS
+   HELPERS
    ========================= */
 
-const getStats = (roadmaps, quizStats) => {
-  const stats = {
-    progress: {},
-  };
+const safeParse = (key, fallback = {}) => {
+  try {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : fallback;
+  } catch (error) {
+    console.error(`Could not read localStorage key: ${key}`, error);
+    return fallback;
+  }
+};
 
-  for (let topic in quizStats) {
-    let total = 0;
-    let completed = 0;
+const getQuizScore = (quiz) => {
+  if (!quiz || !quiz.numQues) return null;
 
-    if (!roadmaps[topic]) continue;
+  return Math.round((quiz.numCorrect / quiz.numQues) * 100);
+};
 
-    Object.keys(roadmaps[topic]).forEach((week, i) => {
-      roadmaps[topic][week].subtopics.forEach(
-        (subtopic, j) => {
-          const time = parseInt(
-            subtopic.time.replace(/^\D+/g, "")
-          );
+const getCourseStats = (roadmap, courseQuizStats = {}) => {
+  let totalSubtopics = 0;
+  let completedSubtopics = 0;
+  let totalQuizScore = 0;
+  let quizCount = 0;
+  let totalStudyTime = 0;
 
-          total += time;
-
-          if (
-            quizStats[topic] &&
-            quizStats[topic][i + 1] &&
-            quizStats[topic][i + 1][j + 1]
-          ) {
-            completed += time;
-          }
-        }
-      );
-    });
-
-    stats.progress[topic] = {
-      total,
-      completed,
+  if (!roadmap || typeof roadmap !== "object") {
+    return {
+      totalSubtopics: 0,
+      completedSubtopics: 0,
+      progress: 0,
+      averageScore: 0,
+      totalStudyTime: 0,
     };
   }
 
-  return stats;
+  const sortedWeeks = Object.keys(roadmap).sort(
+    (a, b) => parseInt(a.split(" ")[1]) - parseInt(b.split(" ")[1])
+  );
+
+  sortedWeeks.forEach((week, weekIndex) => {
+    const subtopics = roadmap[week]?.subtopics || [];
+
+    subtopics.forEach((subtopic, subtopicIndex) => {
+      totalSubtopics++;
+
+      const quiz =
+        courseQuizStats?.[weekIndex + 1]?.[subtopicIndex + 1];
+
+      if (quiz) {
+        completedSubtopics++;
+
+        const score = getQuizScore(quiz);
+
+        if (score !== null) {
+          totalQuizScore += score;
+          quizCount++;
+        }
+
+        if (quiz.timeTaken) {
+          totalStudyTime += quiz.timeTaken;
+        }
+      }
+    });
+  });
+
+  return {
+    totalSubtopics,
+    completedSubtopics,
+    progress:
+      totalSubtopics > 0
+        ? Math.round((completedSubtopics / totalSubtopics) * 100)
+        : 0,
+    averageScore:
+      quizCount > 0 ? Math.round(totalQuizScore / quizCount) : 0,
+    totalStudyTime,
+  };
 };
 
+/* =========================
+   ALL DASHBOARD STATS
+   ========================= */
+
+const calculateDashboardStats = (topics, roadmaps, quizStats) => {
+  const courses = Object.keys(topics);
+
+  let totalSubtopics = 0;
+  let completedSubtopics = 0;
+  let totalQuizScore = 0;
+  let quizCount = 0;
+  let totalStudyTime = 0;
+
+  const courseStats = {};
+
+  courses.forEach((course) => {
+    const stats = getCourseStats(
+      roadmaps[course],
+      quizStats[course]
+    );
+
+    courseStats[course] = stats;
+
+    totalSubtopics += stats.totalSubtopics;
+    completedSubtopics += stats.completedSubtopics;
+
+    if (stats.averageScore > 0) {
+      const courseQuizCount = Object.values(
+        quizStats[course] || {}
+      ).reduce((count, weekData) => {
+        return (
+          count +
+          Object.values(weekData || {}).filter(
+            (quiz) => quiz && quiz.numQues
+          ).length
+        );
+      }, 0);
+
+      totalQuizScore += stats.averageScore * courseQuizCount;
+      quizCount += courseQuizCount;
+    }
+
+    totalStudyTime += stats.totalStudyTime;
+  });
+
+  return {
+    courseStats,
+    totalSubtopics,
+    completedSubtopics,
+    overallProgress:
+      totalSubtopics > 0
+        ? Math.round((completedSubtopics / totalSubtopics) * 100)
+        : 0,
+    averageQuizScore:
+      quizCount > 0
+        ? Math.round(totalQuizScore / quizCount)
+        : 0,
+    totalStudyTime,
+  };
+};
 
 /* =========================
-   START LEARNING
+   CONTINUE LEARNING
+   ========================= */
+
+const findNextLearningItem = (topics, roadmaps, quizStats) => {
+  const courses = Object.keys(topics);
+
+  for (const course of courses) {
+    const roadmap = roadmaps[course];
+    const courseQuizStats = quizStats[course] || {};
+
+    if (!roadmap) continue;
+
+    const sortedWeeks = Object.keys(roadmap).sort(
+      (a, b) => parseInt(a.split(" ")[1]) - parseInt(b.split(" ")[1])
+    );
+
+    for (let weekIndex = 0; weekIndex < sortedWeeks.length; weekIndex++) {
+      const week = sortedWeeks[weekIndex];
+      const subtopics = roadmap[week]?.subtopics || [];
+
+      for (
+        let subtopicIndex = 0;
+        subtopicIndex < subtopics.length;
+        subtopicIndex++
+      ) {
+        const quiz =
+          courseQuizStats?.[weekIndex + 1]?.[subtopicIndex + 1];
+
+        if (!quiz) {
+          return {
+            course,
+            week: weekIndex + 1,
+            subtopic: subtopicIndex + 1,
+            title: subtopics[subtopicIndex]?.subtopic || "Next Topic",
+            description:
+              subtopics[subtopicIndex]?.description ||
+              "Continue your personalized learning path.",
+            progress: getCourseStats(
+              roadmap,
+              courseQuizStats
+            ).progress,
+          };
+        }
+      }
+    }
+  }
+
+  return null;
+};
+
+/* =========================
+   STREAK
+   ========================= */
+
+const calculateStreak = () => {
+  const activity = safeParse("learningActivity", []);
+
+  if (!Array.isArray(activity) || activity.length === 0) {
+    return 0;
+  }
+
+  const uniqueDates = [
+    ...new Set(
+      activity
+        .map((date) => {
+          if (!date) return null;
+
+          const parsed = new Date(date);
+
+          if (Number.isNaN(parsed.getTime())) {
+            return null;
+          }
+
+          return parsed.toISOString().split("T")[0];
+        })
+        .filter(Boolean)
+    ),
+  ].sort((a, b) => new Date(b) - new Date(a));
+
+  if (uniqueDates.length === 0) return 0;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const latestDate = new Date(uniqueDates[0]);
+  latestDate.setHours(0, 0, 0, 0);
+
+  const daysSinceLatest =
+    Math.round(
+      (today.getTime() - latestDate.getTime()) /
+        (1000 * 60 * 60 * 24)
+    );
+
+  if (daysSinceLatest > 1) {
+    return 0;
+  }
+
+  let streak = 1;
+
+  for (let i = 1; i < uniqueDates.length; i++) {
+    const current = new Date(uniqueDates[i - 1]);
+    const previous = new Date(uniqueDates[i]);
+
+    current.setHours(0, 0, 0, 0);
+    previous.setHours(0, 0, 0, 0);
+
+    const difference =
+      Math.round(
+        (current.getTime() - previous.getTime()) /
+          (1000 * 60 * 60 * 24)
+      );
+
+    if (difference === 1) {
+      streak++;
+    } else {
+      break;
+    }
+  }
+
+  return streak;
+};
+
+/* =========================
+   START LEARNING BUTTON
    ========================= */
 
 const TopicButton = ({ children }) => {
@@ -94,104 +317,134 @@ const TopicButton = ({ children }) => {
   );
 };
 
-
 /* =========================
-   PROFILE PAGE
+   DASHBOARD
    ========================= */
 
 const ProfilePage = () => {
+  const [dashboard, setDashboard] = useState({
+    topics: {},
+    roadmaps: {},
+    quizStats: {},
+  });
 
-  const topics =
-    JSON.parse(localStorage.getItem("topics")) || {};
+  const [stats, setStats] = useState({
+    courseStats: {},
+    totalSubtopics: 0,
+    completedSubtopics: 0,
+    overallProgress: 0,
+    averageQuizScore: 0,
+    totalStudyTime: 0,
+  });
 
-  const [stats, setStats] = useState({});
+  const [continueLearning, setContinueLearning] = useState(null);
+  const [streak, setStreak] = useState(0);
 
   const [percentCompletedData, setPercentCompletedData] =
-    useState({});
+    useState(null);
 
+  const navigate = useNavigate();
+
+  /* =========================
+     LOAD DASHBOARD DATA
+     ========================= */
 
   useEffect(() => {
-    const roadmaps =
-      JSON.parse(localStorage.getItem("roadmaps")) || {};
+    const topics = safeParse("topics", {});
+    const roadmaps = safeParse("roadmaps", {});
+    const quizStats = safeParse("quizStats", {});
 
-    const quizStats =
-      JSON.parse(localStorage.getItem("quizStats")) || {};
+    setDashboard({
+      topics,
+      roadmaps,
+      quizStats,
+    });
 
-    setStats(
-      getStats(
+    const calculatedStats = calculateDashboardStats(
+      topics,
+      roadmaps,
+      quizStats
+    );
+
+    setStats(calculatedStats);
+
+    setContinueLearning(
+      findNextLearningItem(
+        topics,
         roadmaps,
         quizStats
       )
     );
+
+    setStreak(calculateStreak());
   }, []);
 
-
   /* =========================
-     PROGRESS DATA
+     CHART
      ========================= */
 
   useEffect(() => {
+    const labels = Object.keys(stats.courseStats);
 
-    const progress = stats.progress || {};
+    if (labels.length === 0) {
+      setPercentCompletedData(null);
+      return;
+    }
 
-    const labels = Object.keys(progress);
-
-    const data = Object.values(progress).map(
-      (item) => {
-        if (!item.total) return 0;
-
-        return Math.round(
-          (item.completed * 100) /
-          item.total
-        );
-      }
+    const data = labels.map(
+      (course) =>
+        stats.courseStats[course]?.progress || 0
     );
-
 
     setPercentCompletedData({
       labels,
-
       datasets: [
         {
           label: "% Completed",
-
           data,
-
           backgroundColor: "#ff6b4a",
-
           borderRadius: 8,
-
           borderWidth: 0,
         },
       ],
     });
-
   }, [stats]);
 
+  const topics = dashboard.topics;
 
-  const courseCount =
-    Object.keys(topics).length;
+  const courseCount = Object.keys(topics).length;
 
+  const studyHours = (
+    stats.totalStudyTime /
+    (1000 * 60 * 60)
+  ).toFixed(1);
 
-  const hardnessIndex = (
-    parseFloat(
-      localStorage.getItem("hardnessIndex")
-    ) || 1
-  ).toFixed(3);
+  /* =========================
+     CONTINUE HANDLER
+     ========================= */
 
+  const handleContinueLearning = () => {
+    if (!continueLearning) {
+      navigate("/topic");
+      return;
+    }
+
+    navigate(
+      `/quiz?topic=${encodeURIComponent(
+        continueLearning.course
+      )}&week=${continueLearning.week}&subtopic=${continueLearning.subtopic}`
+    );
+  };
 
   return (
     <div className="profile_wrapper">
-
       <Header />
-
 
       <main className="dashboard">
 
-
         {/* =========================
             HERO
-            ========================= */}
+        ========================= */}
 
         <section className="hero">
 
@@ -207,9 +460,9 @@ const ProfilePage = () => {
             </h1>
 
             <p>
-              Your intelligent learning workspace
-              for discovering skills, building
-              knowledge, and learning at your own pace.
+              Your intelligent learning workspace for
+              discovering skills, building knowledge,
+              and learning at your own pace.
             </p>
 
             <TopicButton>
@@ -218,7 +471,6 @@ const ProfilePage = () => {
             </TopicButton>
 
           </div>
-
 
           <div className="hero_visual">
 
@@ -247,13 +499,11 @@ const ProfilePage = () => {
 
         </section>
 
-
         {/* =========================
             STAT CARDS
-            ========================= */}
+        ========================= */}
 
         <section className="stat_grid">
-
 
           <div className="stat_card orange">
 
@@ -263,22 +513,17 @@ const ProfilePage = () => {
 
             <div className="stat_content">
 
-              <span>
-                LEARNING PATHS
-              </span>
+              <span>ACTIVE COURSES</span>
 
-              <strong>
-                {courseCount}
-              </strong>
+              <strong>{courseCount}</strong>
 
               <small>
-                Active paths
+                Personalized learning paths
               </small>
 
             </div>
 
           </div>
-
 
           <div className="stat_card gold">
 
@@ -288,61 +533,194 @@ const ProfilePage = () => {
 
             <div className="stat_content">
 
-              <span>
-                ADAPTIVE LEVEL
-              </span>
+              <span>OVERALL PROGRESS</span>
 
               <strong>
-                {hardnessIndex}
+                {stats.overallProgress}%
               </strong>
 
               <small>
-                Personalized difficulty
+                {stats.completedSubtopics} of{" "}
+                {stats.totalSubtopics} topics
               </small>
 
             </div>
 
           </div>
-
 
           <div className="stat_card teal">
 
             <div className="stat_icon">
-              <Bot size={30} />
+              <Brain size={30} />
             </div>
 
             <div className="stat_content">
 
-              <span>
-                AI LEARNING
-              </span>
+              <span>AVERAGE QUIZ SCORE</span>
 
               <strong>
-                Personalized
+                {stats.averageQuizScore > 0
+                  ? `${stats.averageQuizScore}%`
+                  : "--"}
               </strong>
 
               <small>
-                Smart learning for you
+                Based on completed quizzes
               </small>
 
             </div>
 
           </div>
 
+          <div className="stat_card purple">
+
+            <div className="stat_icon">
+              <Flame size={30} />
+            </div>
+
+            <div className="stat_content">
+
+              <span>LEARNING STREAK</span>
+
+              <strong>{streak} days</strong>
+
+              <small>
+                Keep building your consistency
+              </small>
+
+            </div>
+
+          </div>
 
         </section>
 
+        {/* =========================
+            CONTINUE LEARNING
+        ========================= */}
+
+        <section className="continue_section">
+
+          <div className="section_header">
+
+            <div>
+
+              <span className="eyebrow">
+                TEAM MATRIX • NEXT STEP
+              </span>
+
+              <h2>Continue Learning</h2>
+
+            </div>
+
+          </div>
+
+          {continueLearning ? (
+
+            <div className="continue_card">
+
+              <div className="continue_icon">
+                <Play size={28} />
+              </div>
+
+              <div className="continue_content">
+
+                <span className="continue_label">
+                  PICK UP WHERE YOU LEFT OFF
+                </span>
+
+                <h3>
+                  {continueLearning.course}
+                </h3>
+
+                <h4>
+                  {continueLearning.title}
+                </h4>
+
+                <p>
+                  {continueLearning.description}
+                </p>
+
+                <div className="continue_progress">
+
+                  <div className="continue_progress_header">
+                    <span>Course progress</span>
+                    <strong>
+                      {continueLearning.progress}%
+                    </strong>
+                  </div>
+
+                  <div className="progress_track">
+                    <div
+                      className="progress_fill"
+                      style={{
+                        width: `${continueLearning.progress}%`,
+                      }}
+                    />
+                  </div>
+
+                </div>
+
+              </div>
+
+              <button
+                className="continue_button"
+                onClick={handleContinueLearning}
+              >
+                Continue
+                <ArrowRight size={19} />
+              </button>
+
+            </div>
+
+          ) : (
+
+            <div className="continue_card empty_continue">
+
+              <div className="continue_icon">
+                <Trophy size={28} />
+              </div>
+
+              <div className="continue_content">
+
+                <span className="continue_label">
+                  YOU'RE ALL CAUGHT UP
+                </span>
+
+                <h3>
+                  Start a new learning path
+                </h3>
+
+                <p>
+                  Explore a new topic and let
+                  Team Matrix build your next
+                  personalized roadmap.
+                </p>
+
+              </div>
+
+              <button
+                className="continue_button"
+                onClick={() => navigate("/topic")}
+              >
+                Explore
+                <ArrowRight size={19} />
+              </button>
+
+            </div>
+
+          )}
+
+        </section>
 
         {/* =========================
             LOWER DASHBOARD
-            ========================= */}
+        ========================= */}
 
         <section className="dashboard_grid">
 
-
           {/* =========================
               LEARNING PATHS
-              ========================= */}
+          ========================= */}
 
           <div className="learning_paths">
 
@@ -367,84 +745,109 @@ const ProfilePage = () => {
 
             </div>
 
-
             <div className="course_list">
 
               {courseCount > 0 ? (
 
                 Object.keys(topics).map(
-                  (course, i) => (
+                  (course, i) => {
 
-                    <NavLink
-                      key={course}
-                      className="course_link"
-                      to={
-                        "/roadmap?topic=" +
-                        encodeURI(course)
-                      }
-                    >
+                    const courseProgress =
+                      stats.courseStats[course]
+                        ?.progress || 0;
 
-                      <div
-                        className="course_row"
-                        style={{
-                          "--course-color":
-                            i % 2 === 0
-                              ? "#ff6b4a"
-                              : "#ffc857",
-                        }}
+                    const completed =
+                      stats.courseStats[course]
+                        ?.completedSubtopics || 0;
+
+                    const total =
+                      stats.courseStats[course]
+                        ?.totalSubtopics || 0;
+
+                    return (
+                      <NavLink
+                        key={course}
+                        className="course_link"
+                        to={
+                          "/roadmap?topic=" +
+                          encodeURIComponent(course)
+                        }
                       >
 
-                        <div className="course_number">
-                          0{i + 1}
-                        </div>
+                        <div
+                          className="course_row"
+                          style={{
+                            "--course-color":
+                              i % 3 === 0
+                                ? "#ff6b4a"
+                                : i % 3 === 1
+                                ? "#ffc857"
+                                : "#4ed1b1",
+                          }}
+                        >
 
+                          <div className="course_number">
+                            {String(i + 1).padStart(2, "0")}
+                          </div>
 
-                        <div className="course_info">
+                          <div className="course_info">
 
-                          <h3>
-                            {course}
-                          </h3>
+                            <h3>{course}</h3>
 
-                          <div className="course_meta">
+                            <div className="course_meta">
 
-                            <span>
-                              {topics[course].time}
-                            </span>
+                              <span>
+                                {topics[course]?.time ||
+                                  "Custom path"}
+                              </span>
 
-                            <span>
-                              {topics[course].knowledge_level}
-                            </span>
+                              <span>
+                                {topics[course]
+                                  ?.knowledge_level ||
+                                  "Personalized"}
+                              </span>
+
+                              <span>
+                                {completed}/{total} topics
+                              </span>
+
+                            </div>
+
+                            <div className="mini_progress">
+
+                              <div
+                                className="mini_progress_fill"
+                                style={{
+                                  width:
+                                    `${courseProgress}%`,
+                                }}
+                              />
+
+                            </div>
+
+                            <div className="course_progress_text">
+                              <span>
+                                Progress
+                              </span>
+
+                              <strong>
+                                {courseProgress}%
+                              </strong>
+                            </div>
 
                           </div>
 
+                          <div className="course_arrow">
 
-                          <div className="mini_progress">
-
-                            <div
-                              className="mini_progress_fill"
-                              style={{
-                                width: "32%",
-                              }}
-                            />
+                            <ArrowRight size={26} />
 
                           </div>
 
                         </div>
 
-
-                        <div className="course_arrow">
-
-                          <ArrowRight
-                            size={26}
-                          />
-
-                        </div>
-
-                      </div>
-
-                    </NavLink>
-
-                  )
+                      </NavLink>
+                    );
+                  }
                 )
 
               ) : (
@@ -471,9 +874,6 @@ const ProfilePage = () => {
 
               )}
 
-
-              {/* ADD NEW PATH */}
-
               <button
                 className="add_path"
                 onClick={() =>
@@ -498,10 +898,9 @@ const ProfilePage = () => {
 
           </div>
 
-
           {/* =========================
               PROGRESS
-              ========================= */}
+          ========================= */}
 
           <div className="progress_panel">
 
@@ -521,36 +920,38 @@ const ProfilePage = () => {
 
             </div>
 
-
             <div className="chart_box">
 
-              {Object.keys(
-                percentCompletedData
-              ).length > 0 ? (
+              {percentCompletedData ? (
 
                 <Bar
-                  data={
-                    percentCompletedData
-                  }
-
+                  data={percentCompletedData}
                   options={{
                     maintainAspectRatio: false,
-
                     indexAxis: "y",
 
                     plugins: {
                       legend: {
                         display: false,
                       },
+
+                      tooltip: {
+                        callbacks: {
+                          label: (context) =>
+                            `${context.raw}% complete`,
+                        },
+                      },
                     },
 
                     scales: {
+
                       x: {
                         beginAtZero: true,
                         max: 100,
 
                         ticks: {
                           color: "#9c928b",
+
                           callback: (value) =>
                             value + "%",
                         },
@@ -562,6 +963,7 @@ const ProfilePage = () => {
                       },
 
                       y: {
+
                         ticks: {
                           color: "#fff7ed",
                         },
@@ -572,23 +974,67 @@ const ProfilePage = () => {
                       },
                     },
                   }}
-
                 />
 
               ) : (
 
                 <div className="no_progress">
-                  <BarChart3Fallback />
+
+                  <TrendingUp
+                    size={45}
+                    strokeWidth={1.5}
+                  />
+
                   <p>
                     Start learning to see
                     your progress here.
                   </p>
+
                 </div>
 
               )}
 
             </div>
 
+            <div className="insight_grid">
+
+              <div className="insight_card">
+
+                <Clock3 size={21} />
+
+                <div>
+
+                  <strong>
+                    {studyHours}h
+                  </strong>
+
+                  <span>
+                    Quiz time
+                  </span>
+
+                </div>
+
+              </div>
+
+              <div className="insight_card">
+
+                <Target size={21} />
+
+                <div>
+
+                  <strong>
+                    {stats.completedSubtopics}
+                  </strong>
+
+                  <span>
+                    Topics completed
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
 
             <div className="progress_message">
 
@@ -616,20 +1062,8 @@ const ProfilePage = () => {
         </section>
 
       </main>
-
     </div>
   );
 };
-
-
-/* Small fallback icon */
-
-const BarChart3Fallback = () => (
-  <TrendingUp
-    size={45}
-    strokeWidth={1.5}
-  />
-);
-
 
 export default ProfilePage;

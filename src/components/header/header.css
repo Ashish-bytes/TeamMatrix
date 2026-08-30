@@ -1,0 +1,191 @@
+/* =========================
+   HEADER
+   ========================= */
+
+header {
+  position: relative;
+
+  width: 100%;
+
+  margin-bottom: 3rem;
+
+  padding: 0.5rem 0;
+}
+
+
+/* =========================
+   LOGO
+   ========================= */
+
+.logo {
+  margin-left: 2rem;
+  margin-top: 0.7rem;
+
+  transition: transform 0.2s ease;
+}
+
+.logo:hover {
+  transform: scale(1.03);
+}
+
+
+/* =========================
+   LANGUAGE BUTTON
+   ========================= */
+
+.languageButton {
+  position: absolute;
+
+  right: 12rem;
+  top: 20px;
+
+  padding: 9px 16px;
+
+  background: #211c1b !important;
+
+  color: #fff7ed !important;
+
+  border: 1px solid #ffc857 !important;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.languageButton:hover {
+  transform: translateY(-2px);
+
+  background: #ffc857 !important;
+
+  color: #151313 !important;
+
+  border-color: #ffc857 !important;
+
+  box-shadow:
+    0 8px 25px rgba(255, 200, 87, 0.2);
+}
+
+.languageButton:active {
+  transform: translateY(0);
+}
+
+
+/* =========================
+   HOME BUTTON
+   ========================= */
+
+header .Home {
+  position: absolute;
+
+  right: 5ch;
+  top: 20px;
+
+  color: #fff7ed;
+
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+header .Home:hover {
+  transform: translateY(-3px);
+
+  color: #ff6b4a;
+}
+
+
+/* =========================
+   PROFILE BUTTON
+   ========================= */
+
+header .ProfileAvatar {
+  display: none;
+
+  position: absolute;
+
+  right: 5ch;
+  top: 10px;
+
+  color: #fff7ed;
+
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+header .ProfileAvatar:hover {
+  transform: translateY(-3px);
+
+  color: #ff6b4a;
+}
+
+
+/* =========================
+   OLD HEADER TITLE
+   ========================= */
+
+header h1 {
+  font-size: 1.5rem;
+
+  font-weight: 100;
+
+  margin-left: 2rem;
+
+  color: #fff7ed;
+}
+
+header h1 .x {
+  font-weight: 100;
+
+  font-size: 1.8rem;
+
+  font-family: "Times New Roman", Times, serif;
+
+  color: #ff6b4a;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 700px) {
+  header {
+    margin-bottom: 2rem;
+  }
+
+  .logo {
+    margin-left: 1rem;
+
+    max-width: 130px;
+
+    height: auto;
+  }
+
+  .languageButton {
+    right: 4.5rem;
+
+    top: 12px;
+
+    padding: 7px 10px;
+
+    font-size: 12px;
+  }
+
+  header .Home {
+    right: 1rem;
+
+    top: 15px;
+  }
+}

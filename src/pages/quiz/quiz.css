@@ -1,0 +1,338 @@
+/* =========================
+   QUIZ PAGE
+   ========================= */
+
+.quiz_wrapper {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(255, 107, 74, 0.12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(255, 200, 87, 0.08),
+      transparent 30%
+    ),
+    #151313;
+
+  color: #fff7ed;
+}
+
+.quiz_wrapper .content {
+  padding: 3rem 8vw 5rem;
+}
+
+
+/* =========================
+   QUESTION CARD
+   ========================= */
+
+.question {
+  padding: 3rem;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 107, 74, 0.08),
+      rgba(255, 200, 87, 0.03)
+    ),
+    #211c1b;
+
+  border: 1px solid rgba(255, 107, 74, 0.2);
+
+  border-radius: 24px;
+
+  margin-top: 30px;
+
+  line-height: 1.5;
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.3);
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.question:hover {
+  border-color: rgba(255, 107, 74, 0.4);
+
+  box-shadow:
+    0 18px 45px rgba(255, 107, 74, 0.08);
+}
+
+
+/* =========================
+   QUESTION TEXT
+   ========================= */
+
+.question h3 {
+  color: #fff7ed;
+
+  font-weight: 600;
+
+  margin-bottom: 1em;
+
+  line-height: 1.5;
+}
+
+
+/* =========================
+   OPTIONS
+   ========================= */
+
+.question .options {
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  text-align: left;
+
+  gap: 0.5rem;
+}
+
+.option {
+  position: relative;
+
+  width: 100%;
+}
+
+
+/* =========================
+   OPTION LABEL
+   ========================= */
+
+.option label {
+  display: block;
+
+  width: 100%;
+
+  text-align: left;
+
+  box-sizing: border-box;
+
+  background: #2a2422;
+
+  color: #fff7ed;
+
+  padding: 1.3rem 3rem;
+
+  margin-block: 0.3rem;
+
+  border-radius: 14px;
+
+  font-size: 18px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.option label:hover {
+  background: #332b28;
+
+  border-color: rgba(255, 107, 74, 0.45);
+
+  transform: translateX(4px);
+}
+
+
+/* Hide radio */
+
+.option input[type="radio"] {
+  display: none;
+}
+
+
+/* =========================
+   CORRECT ANSWER
+   ========================= */
+
+.attempted.correct ~ label {
+  border: 2px solid #62e6b0;
+
+  color: #62e6b0;
+
+  background: rgba(34, 105, 79, 0.3);
+}
+
+
+/* =========================
+   WRONG ANSWER
+   ========================= */
+
+input[type="radio"]:checked.wrong ~ label {
+  border: 2px solid #ff6b4a;
+
+  color: #ff8060;
+
+  background: rgba(100, 35, 25, 0.35);
+}
+
+
+/* =========================
+   OPTION ICON
+   ========================= */
+
+.optionIcon {
+  position: absolute;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  right: 2em;
+
+  display: none;
+
+  color: #ffc857;
+}
+
+input[type="radio"]:checked ~ .optionIcon {
+  display: block;
+}
+
+
+/* =========================
+   EXPLANATION / REASON
+   ========================= */
+
+.reason {
+  font-size: 20px;
+
+  margin-top: 1.5rem;
+
+  color: #ffc857;
+
+  line-height: 1.6;
+
+  padding: 1rem 1.2rem;
+
+  background: rgba(255, 200, 87, 0.05);
+
+  border-left: 3px solid #ffc857;
+
+  border-radius: 0 10px 10px 0;
+}
+
+
+/* =========================
+   SUBMIT AREA
+   ========================= */
+
+.quiz_wrapper .submit {
+  margin-bottom: 3rem;
+
+  margin-top: 2rem;
+
+  display: flex;
+
+  justify-content: center;
+
+  width: 100%;
+}
+
+
+/* =========================
+   SUBMIT BUTTON
+   ========================= */
+
+.quiz_wrapper .submit button {
+  min-width: 220px;
+
+  padding: 1rem 2.5rem;
+
+  background: #ff6b4a;
+
+  color: #151313;
+
+  border: none;
+
+  border-radius: 14px;
+
+  font-size: 1.1rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 10px 25px rgba(255, 107, 74, 0.2);
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.quiz_wrapper .submit button:hover {
+  transform: translateY(-4px);
+
+  background: #ff8060;
+
+  box-shadow:
+    0 15px 35px rgba(255, 107, 74, 0.3);
+}
+
+.quiz_wrapper .submit button:active {
+  transform: translateY(0);
+}
+
+
+/* =========================
+   GENERAL QUIZ BUTTONS
+   ========================= */
+
+.quiz_wrapper button {
+  font-family: inherit;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 700px) {
+  .quiz_wrapper .content {
+    padding: 2rem 1rem 4rem;
+  }
+
+  .question {
+    padding: 1.5rem;
+
+    border-radius: 18px;
+  }
+
+  .question h3 {
+    font-size: 1.1rem;
+  }
+
+  .option label {
+    padding: 1rem 1.2rem;
+
+    font-size: 16px;
+  }
+
+  .optionIcon {
+    right: 1rem;
+  }
+
+  .reason {
+    font-size: 17px;
+  }
+
+  .quiz_wrapper .submit button {
+    width: 90%;
+  }
+}

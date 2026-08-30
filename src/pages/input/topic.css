@@ -1,0 +1,453 @@
+/* =========================
+   TOPIC / INPUT PAGE
+   ========================= */
+
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(255, 107, 74, 0.14),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 75%,
+      rgba(255, 200, 87, 0.08),
+      transparent 30%
+    ),
+    #151313;
+
+  color: #fff7ed;
+}
+
+
+/* =========================
+   MAIN
+   ========================= */
+
+.main {
+  flex-direction: column;
+
+  width: 100%;
+
+  padding-top: 4rem;
+  padding-bottom: 5rem;
+
+  color: #fff7ed;
+}
+
+.main h2 {
+  color: #fff7ed;
+
+  font-size: 2rem;
+  font-weight: 700;
+
+  margin-bottom: 0.5rem;
+}
+
+.main h3 {
+  color: #b8aaa3;
+
+  font-weight: 400;
+
+  line-height: 1.5;
+}
+
+
+/* =========================
+   TOPIC INPUT
+   ========================= */
+
+.TopicInput {
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+
+  position: relative;
+
+  width: min(900px, 90vw);
+}
+
+.TopicInput input {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 1.2rem 4rem 1.2rem 3rem;
+
+  background: #211c1b;
+
+  color: #fff7ed;
+
+  border: 1px solid rgba(255, 107, 74, 0.35);
+
+  border-radius: 16px;
+
+  outline: none;
+
+  font-size: 1.1rem;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.TopicInput input::placeholder {
+  color: #8f817b;
+}
+
+.TopicInput input:focus {
+  background: #251f1d;
+
+  border-color: #ff6b4a;
+
+  box-shadow:
+    0 0 0 3px rgba(255, 107, 74, 0.1);
+}
+
+
+/* Input icon */
+
+.TopicInput .icon {
+  position: absolute;
+
+  left: 1rem;
+  top: 50%;
+
+  width: 24px;
+  height: 24px;
+
+  transform: translateY(-50%);
+
+  color: #ff6b4a;
+
+  pointer-events: none;
+
+  z-index: 2;
+}
+
+/* Input submit icon */
+
+.TopicInput button {
+  position: absolute;
+
+  right: 0.8rem;
+  bottom: 0.7rem;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  background: #ff6b4a;
+
+  color: #151313;
+
+  border: none;
+
+  border-radius: 12px;
+
+  outline: none;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.TopicInput button:hover {
+  transform: translateY(-2px);
+
+  background: #ff8060;
+
+  color: #151313;
+}
+
+
+/* =========================
+   SUGGESTIONS
+   ========================= */
+
+.suggestions {
+  width: min(900px, 90vw);
+
+  padding: 1rem;
+
+  color: #fff7ed;
+}
+
+.suggestions button {
+  background: transparent;
+
+  border: none;
+}
+
+
+/* =========================
+   SUGGESTION PILLS
+   ========================= */
+
+.suggestionPill {
+  position: relative;
+
+  padding: 0.8em 2em;
+
+  padding-right: 3.5em;
+
+  background: #211c1b;
+
+  color: #fff7ed !important;
+
+  border: 1px solid rgba(255, 107, 74, 0.35);
+
+  border-radius: 14px;
+
+  font-size: 18px;
+
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.suggestionPill:hover {
+  transform: translateY(-3px);
+
+  background: #2b2422;
+
+  border-color: #ff6b4a;
+
+  box-shadow:
+    0 8px 25px rgba(255, 107, 74, 0.15);
+}
+
+
+/* Suggestion arrow */
+
+.suggestionPill .arrow {
+  position: absolute;
+
+  right: 1.2ch;
+
+  top: 50%;
+
+  padding-right: 0;
+
+  transform: translateY(-50%);
+
+  color: #ffc857;
+
+  transition:
+    right 0.2s ease,
+    color 0.2s ease;
+}
+
+.suggestionPill:hover .arrow {
+  right: 0.7ch;
+
+  color: #ff6b4a;
+}
+
+
+/* =========================
+   DETAILS
+   ========================= */
+
+.setDetails {
+  padding-top: 2.5rem;
+
+  color: #fff7ed;
+}
+
+
+/* =========================
+   TIME INPUT
+   ========================= */
+
+#timeInput {
+  width: 150px;
+
+  padding: 0.8rem 1rem;
+
+  text-align: right;
+
+  background: #211c1b;
+
+  color: #fff7ed;
+
+  border: 1px solid rgba(255, 107, 74, 0.35);
+
+  border-radius: 10px;
+
+  outline: none;
+}
+
+#timeInput:focus {
+  border-color: #ff6b4a;
+
+  box-shadow:
+    0 0 0 3px rgba(255, 107, 74, 0.1);
+}
+
+.TimeInput {
+  gap: 3ch;
+
+  color: #fff7ed;
+}
+
+
+/* =========================
+   SUBMIT BUTTON
+   ========================= */
+
+.SubmitButton {
+  position: relative;
+
+  font-size: 24px;
+
+  padding: 0.8em 3em;
+
+  border-radius: 16px;
+
+  margin-top: 1.5em;
+
+  background: #ff6b4a !important;
+
+  color: #151313 !important;
+
+  border: none !important;
+
+  outline: none;
+
+  cursor: pointer;
+
+  font-weight: 700;
+
+  z-index: 1;
+
+  box-shadow:
+    0 12px 30px rgba(255, 107, 74, 0.2);
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+/* Remove old rainbow effect */
+
+.SubmitButton::after {
+  display: none !important;
+
+  content: none !important;
+}
+
+.SubmitButton::before {
+  display: none !important;
+
+  content: none !important;
+}
+
+
+/* Submit hover */
+
+.SubmitButton:hover {
+  transform: translateY(-4px);
+
+  background: #ff8060 !important;
+
+  color: #151313 !important;
+
+  box-shadow:
+    0 18px 40px rgba(255, 107, 74, 0.3);
+}
+
+.SubmitButton:active {
+  transform: translateY(0);
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 700px) {
+  .main {
+    padding-top: 2.5rem;
+    padding-bottom: 4rem;
+  }
+
+  .main h2 {
+    font-size: 1.6rem;
+
+    padding-inline: 1rem;
+
+    text-align: center;
+  }
+
+  .main h3 {
+    padding-inline: 1.2rem;
+
+    text-align: center;
+  }
+
+  .TopicInput {
+    width: 90vw;
+  }
+
+  .TopicInput input {
+    font-size: 1rem;
+
+    padding-left: 2.7rem;
+  }
+
+  .suggestions {
+    width: 90vw;
+
+    padding: 0.5rem;
+  }
+
+  .suggestionPill {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    font-size: 16px;
+  }
+
+  .setDetails {
+    padding-inline: 1rem;
+  }
+
+  .TimeInput {
+    gap: 1rem;
+
+    flex-wrap: wrap;
+  }
+
+  #timeInput {
+    width: 120px;
+  }
+
+  .SubmitButton {
+    width: 90%;
+
+    font-size: 20px;
+
+    padding: 0.9em 1.5em;
+  }
+}

@@ -1,0 +1,554 @@
+/* =========================
+   ROADMAP PAGE
+   ========================= */
+
+.roadmap_wrapper {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 5% 10%,
+      rgba(255, 107, 74, 0.12),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 95% 70%,
+      rgba(255, 200, 87, 0.08),
+      transparent 30%
+    ),
+    #151313;
+
+  color: #fff7ed;
+}
+
+.roadmap_wrapper .content {
+  padding: 3rem 6vw 5rem;
+}
+
+
+/* =========================
+   TOPIC
+   ========================= */
+
+.roadmap_wrapper .topic {
+  justify-content: space-between;
+
+  margin-bottom: 3rem;
+
+  color: #fff7ed;
+}
+
+
+/* =========================
+   WEEK BAR
+   ========================= */
+
+.topic-bar {
+  position: relative;
+
+  padding: 3rem 10ch 3rem 7ch;
+
+  margin-block: 2rem;
+
+  z-index: 0;
+
+  border-left: 12px solid var(--clr);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 107, 74, 0.15),
+      rgba(255, 200, 87, 0.04)
+    ),
+    #211c1b;
+
+  border-radius: 0 20px 20px 0;
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.25);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.topic-bar:hover {
+  transform: translateX(5px);
+
+  box-shadow:
+    0 20px 45px rgba(255, 107, 74, 0.12);
+}
+
+.topic-bar::after {
+  display: none;
+}
+
+.topic-bar .week {
+  position: absolute;
+
+  top: 0.8em;
+
+  color: #ffc857;
+
+  font-weight: 700;
+}
+
+
+/* =========================
+   PLUS BUTTON
+   ========================= */
+
+.plus {
+  position: absolute;
+
+  right: 3rem;
+  top: 3rem;
+
+  width: 45px;
+  height: 45px;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ff6b4a;
+
+  color: #151313;
+
+  border: none;
+  border-radius: 50%;
+
+  text-align: center;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.plus:hover {
+  transform: rotate(90deg) scale(1.08);
+
+  background: #ffc857;
+
+  color: #151313;
+}
+
+
+/* =========================
+   SUBTOPICS
+   ========================= */
+
+.subtopics {
+  overflow: hidden;
+
+  margin-top: 2rem;
+
+  transition: 0.5s;
+}
+
+.subtopic {
+  position: relative;
+
+  z-index: 0;
+
+  margin-block: 2rem;
+
+  padding: 3rem 3rem 3.8rem 8rem;
+
+  overflow: hidden;
+
+  border-radius: 28px;
+
+  background: #211c1b;
+
+  border: 1px solid rgba(255, 107, 74, 0.18);
+
+  box-shadow:
+    0 12px 35px rgba(0, 0, 0, 0.25);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.subtopic:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(255, 107, 74, 0.5);
+
+  box-shadow:
+    0 18px 45px rgba(255, 107, 74, 0.08);
+}
+
+.subtopic::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: -1;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--clr),
+      transparent 70%
+    );
+
+  opacity: 0.07;
+}
+
+
+/* =========================
+   NUMBER
+   ========================= */
+
+.subtopic .number {
+  position: absolute;
+
+  left: 3rem;
+  top: 1.5rem;
+
+  font-size: 90px;
+  font-weight: 1000;
+
+  color: transparent;
+
+  -webkit-text-stroke: 1px #ff6b4a;
+
+  opacity: 0.7;
+}
+
+
+/* =========================
+   DETAIL
+   ========================= */
+
+.subtopic .detail {
+  position: relative;
+
+  max-width: 650px;
+}
+
+.subtopic .detail h3 {
+  padding-right: 4.5ch;
+
+  color: #fff7ed;
+}
+
+.subtopic .time {
+  color: #ffc857;
+
+  position: absolute;
+
+  right: 0;
+
+  transform: translateX(100%);
+
+  top: 0;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   SUBTOPIC BUTTONS
+   ========================= */
+
+.subtopic .buttons {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 1rem;
+
+  margin-top: 2rem;
+}
+
+.subtopic .buttons button {
+  background: transparent;
+
+  font-size: 16px;
+
+  color: #ff6b4a;
+
+  border: 1px solid #ff6b4a;
+
+  padding: 0.85em 2em;
+
+  width: 200px;
+
+  font-weight: 600;
+
+  border-radius: 12px;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.subtopic .buttons button:hover {
+  background: #ff6b4a;
+
+  color: #151313;
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 8px 25px rgba(255, 107, 74, 0.25);
+}
+
+
+/* =========================
+   QUIZ BUTTON
+   ========================= */
+
+.quizButton {
+  background: #ffc857 !important;
+
+  color: #151313 !important;
+
+  border: none !important;
+
+  font-weight: 700 !important;
+}
+
+.quizButton:hover {
+  background: #ffd477 !important;
+
+  color: #151313 !important;
+}
+
+
+/* =========================
+   COMPLETED QUIZ
+   ========================= */
+
+.quiz_completed {
+  color: #62e6b0;
+
+  padding: 1em 0em;
+
+  font-weight: 600;
+}
+
+
+/* =========================
+   RESOURCES
+   ========================= */
+
+.resources {
+  height: 100%;
+
+  margin: auto;
+
+  gap: 2em;
+
+  min-height: 300px;
+}
+
+
+/* =========================
+   RESOURCE CONTENT
+   ========================= */
+
+.res {
+  line-height: 1.6;
+
+  overflow: auto;
+
+  margin-top: 2.3em;
+}
+
+.res p {
+  margin-block: 1.5rem;
+
+  color: #c7bcb5;
+}
+
+.res-heading {
+  font-weight: 900;
+
+  color: #fff7ed;
+
+  margin-bottom: 1.5rem;
+
+  font-size: 3rem;
+
+  line-height: 1.1em;
+}
+
+
+/* =========================
+   RESOURCE BUTTONS
+   ========================= */
+
+.resources button {
+  position: relative;
+
+  padding: 2rem;
+
+  border-radius: 22px;
+
+  background: #211c1b;
+
+  color: #fff7ed;
+
+  font-size: 1.2rem;
+
+  font-weight: 700;
+
+  width: 300px;
+
+  max-width: 90vw;
+
+  border: 1px solid rgba(255, 107, 74, 0.45);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.resources button:hover {
+  background: #ff6b4a;
+
+  color: #151313;
+
+  border-color: #ff6b4a;
+
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 15px 35px rgba(255, 107, 74, 0.2);
+}
+
+.resources button.primary {
+  background: #ff6b4a;
+
+  color: #151313;
+
+  border: none;
+}
+
+.resources button.primary:hover {
+  background: #ff8060;
+
+  color: #151313;
+}
+
+.resources .icon {
+  width: 100%;
+
+  margin-bottom: 1em;
+}
+
+
+/* =========================
+   HARDNESS
+   ========================= */
+
+.hardness {
+  position: absolute;
+
+  bottom: 10px;
+  right: 3em;
+
+  width: max-content;
+
+  color: #b8aaa3;
+
+  text-decoration: underline;
+
+  cursor: pointer;
+
+  opacity: 0.5;
+}
+
+
+/* =========================
+   RECAPTCHA
+   ========================= */
+
+.grecaptcha-badge {
+  visibility: hidden !important;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 700px) {
+  .roadmap_wrapper .content {
+    padding: 2rem 1rem 4rem;
+  }
+
+  .topic-bar {
+    padding: 3rem 2rem 3rem 4rem;
+
+    border-left-width: 7px;
+  }
+
+  .topic-bar .week {
+    font-size: 0.85rem;
+  }
+
+  .plus {
+    right: 1.5rem;
+
+    top: 1.5rem;
+
+    width: 38px;
+    height: 38px;
+  }
+
+  .subtopic {
+    padding: 2.5rem 1.5rem 2.5rem 4.5rem;
+
+    border-radius: 20px;
+  }
+
+  .subtopic .number {
+    left: 1rem;
+
+    top: 1.2rem;
+
+    font-size: 60px;
+  }
+
+  .subtopic .time {
+    position: static;
+
+    transform: none;
+
+    margin-top: 0.5rem;
+  }
+
+  .subtopic .buttons {
+    flex-direction: column;
+  }
+
+  .subtopic .buttons button {
+    width: 100%;
+  }
+
+  .res-heading {
+    font-size: 2rem;
+  }
+
+  .resources button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,242 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow: auto;
+  min-height: 100%;
+  width: 100%;
+  max-width: 100vw;
+
+  scroll-behavior: smooth;
+
+  font-family: Inter, sans-serif;
+
+  background: #151313;
+
+  color: #fff7ed;
+}
+
+html {
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+
+/* =========================
+   SELECTION
+   ========================= */
+
+::selection {
+  background-color: #ff6b4a;
+  color: #151313;
+}
+
+
+/* =========================
+   FLEXBOX
+   ========================= */
+
+.flexbox {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 15px;
+}
+
+
+/* =========================
+   HEADER
+   ========================= */
+
+header {
+  width: 100%;
+
+  min-height: 60px;
+
+  line-height: 60px;
+
+  padding: 10px 3ch;
+}
+
+
+/* =========================
+   HEADINGS
+   ========================= */
+
+h1 {
+  font-size: 65px;
+
+  font-weight: 900;
+
+  color: #fff7ed;
+}
+
+h2 {
+  font-size: 35px;
+
+  font-weight: 300;
+
+  color: #fff7ed;
+}
+
+h3 {
+  font-size: 25px;
+
+  font-weight: 400;
+
+  color: #fff7ed;
+}
+
+p {
+  font-size: 18px;
+
+  font-weight: 300;
+
+  color: #c7bcb5;
+}
+
+
+/* =========================
+   INPUT CONTAINER
+   ========================= */
+
+.inputContainer {
+  max-width: 80%;
+}
+
+
+/* =========================
+   INPUTS
+   ========================= */
+
+input,
+select,
+option,
+textarea {
+  font-size: 65px;
+
+  font-weight: 900;
+
+  width: 100%;
+
+  background-color: transparent;
+
+  border: none;
+
+  outline: none;
+
+  color: #fff7ed;
+
+  border-bottom: 3px solid #4a3a34;
+
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-bottom-color: #ff6b4a;
+}
+
+option {
+  background-color: #211c1b;
+
+  color: #fff7ed;
+
+  font-size: 30px;
+}
+
+::placeholder {
+  color: #81736c;
+}
+
+
+/* =========================
+   BUTTONS
+   ========================= */
+
+button {
+  cursor: pointer;
+
+  outline: none;
+
+  font-family: inherit;
+}
+
+
+/* =========================
+   SCROLLBAR
+   ========================= */
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #151313;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3b2c27;
+
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff6b4a;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 700px) {
+  h1 {
+    font-size: 42px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+
+  h3 {
+    font-size: 21px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  input,
+  select,
+  option,
+  textarea {
+    font-size: 35px;
+  }
+
+  .inputContainer {
+    max-width: 90%;
+  }
+}

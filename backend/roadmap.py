@@ -418,13 +418,19 @@ def create_roadmap(topic, time, knowledge_level):
             safety_settings=safety_settings,
             generation_config=generation_config,
             system_instruction=(
-                "You are an AI agent who provides good "
-                "personalized learning paths based on user input. "
-                "Provide subtopics with a small description and "
-                "estimated learning time. Give more time to "
-                "subtopics that require more understanding. "
-                "Keep every key lowercase. "
-                "Return ONLY valid JSON."
+                "You are an AI agent who creates personalized "
+                "learning roadmaps. You MUST return ONLY valid JSON. "
+                "The JSON MUST contain week-based keys such as "
+                "\"week 1\", \"week 2\", \"week 3\", and \"week 4\". "
+                "Each week MUST contain a \"topic\" string and a "
+                "\"subtopics\" array. Each subtopic MUST contain "
+                "the fields \"subtopic\", \"time\", and "
+                "\"description\". Do NOT return fields such as "
+                "Duration, Level, Title, Total_hours, summary, or "
+                "other non-week top-level fields. Keep every key "
+                "lowercase. Create a practical personalized learning "
+                "path based on the requested topic, duration, and "
+                "knowledge level. "
             ),
         )
 
@@ -451,15 +457,91 @@ def create_roadmap(topic, time, knowledge_level):
 
         roadmap_data = json.loads(response_text)
 
+        # ========================================================
+        # VALIDATE ROADMAP STRUCTURE
+        # ========================================================
+        # Gemini must return a week-based roadmap. Each week must
+        # contain a topic and a non-empty list of subtopics.
+        # This prevents responses such as:
+        # Duration / Level / Title / Total_hours
+        # from reaching the frontend.
+
         if not isinstance(roadmap_data, dict):
             raise ValueError(
                 "Gemini returned an invalid roadmap."
             )
 
+        week_keys = list(roadmap_data.keys())
+
+        if not week_keys:
+            raise ValueError(
+                "Gemini returned an empty roadmap."
+            )
+
+        valid_roadmap = True
+
+        for week_key in week_keys:
+            # Every top-level key must be a week.
+            if not str(week_key).lower().startswith("week"):
+                valid_roadmap = False
+                break
+
+            week_data = roadmap_data.get(week_key)
+
+            if not isinstance(week_data, dict):
+                valid_roadmap = False
+                break
+
+            if not isinstance(week_data.get("topic"), str):
+                valid_roadmap = False
+                break
+
+            if not isinstance(week_data.get("subtopics"), list):
+                valid_roadmap = False
+                break
+
+            if len(week_data["subtopics"]) == 0:
+                valid_roadmap = False
+                break
+
+            for subtopic in week_data["subtopics"]:
+                if not isinstance(subtopic, dict):
+                    valid_roadmap = False
+                    break
+
+                if not isinstance(subtopic.get("subtopic"), str):
+                    valid_roadmap = False
+                    break
+
+                if not isinstance(subtopic.get("time"), str):
+                    valid_roadmap = False
+                    break
+
+                if not isinstance(subtopic.get("description"), str):
+                    valid_roadmap = False
+                    break
+
+            if not valid_roadmap:
+                break
+
+        if not valid_roadmap:
+            print(
+                "Gemini returned an unexpected roadmap structure."
+            )
+            print(
+                "Expected week-based roadmap with subtopics. "
+                "Using local fallback roadmap."
+            )
+
+            return fallback_roadmap(
+                topic,
+                time,
+                knowledge_level,
+            )
+
         print("Generated AI roadmap successfully.")
 
         return roadmap_data
-
     except Exception as error:
 
         print(

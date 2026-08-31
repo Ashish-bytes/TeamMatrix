@@ -350,7 +350,7 @@ const QuizPage = () => {
        ========================= */
 
     axios.defaults.baseURL =
-      "http://localhost:5000";
+      "https://teammatrix-backend.onrender.com";
 
     axios({
       method: "POST",

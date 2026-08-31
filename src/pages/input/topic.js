@@ -190,7 +190,7 @@ const TopicPage = (props) => {
           if (!Object.keys(topics).includes(topic)) {
             let data = { topic, time, knowledge_level: knowledgeLevel };
             console.log(data);
-            axios.defaults.baseURL = "http://127.0.0.1:5000";
+            axios.defaults.baseURL = "https://teammatrix-backend.onrender.com";
             axios({
               method: "POST",
               url: "/api/roadmap",

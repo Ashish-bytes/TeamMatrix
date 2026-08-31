@@ -3,7 +3,7 @@ import axios from "axios";
 async function translate(text, toLang) {
   try {
     const response = await axios.post(
-      "http://127.0.0.1:5000/api/translate",
+      "https://teammatrix-backend.onrender.com/api/translate",
       {
         textArr: text,
         toLang: toLang,

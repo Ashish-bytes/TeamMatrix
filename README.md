@@ -87,7 +87,7 @@ Watch TeamMatrix in action:
 
 TeamMatrix connects a modular **React Single Page Application (SPA)** frontend with a **Flask REST API** backend powered by **Google Gemini 3.6 Flash**.
 
-![Process Flow Diagram](public/process_flow.jpg)
+![Process Flow Diagram](public/processflow.jpg)
 
 ### Core User Flow:
 1. **Input Phase**: User specifies a topic, duration, knowledge level, and weekly study hours.

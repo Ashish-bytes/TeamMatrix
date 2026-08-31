@@ -11,15 +11,21 @@
   [![Gemini AI](https://img.shields.io/badge/AI%20Engine-Gemini%203.6%20Flash-8E44AD?style=for-the-badge&logo=googlecloud&logoColor=white)](https://ai.google.dev/)
   [![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 
-  [**Explore Features**](#-key-features) • [**System Architecture**](#-system-architecture) • [**Getting Started**](#-getting-started) • [**API Reference**](#-api-endpoints) • [**Demo Video**](#-demo-video)
+  [**Demo Video**](#-demo-video) • [**GitHub Repository**](https://github.com/shagunagg12/TeamMatrix) • [**Features**](#-key-features) • [**Getting Started**](#-getting-started) • [**API Reference**](#-api-endpoints)
 
 </div>
 
 ---
 
+## 🔗 Project Links
+
+- 📹 **Demo Video**: [Watch Demo on YouTube](https://www.youtube.com/watch?v=aNwq-aMi46g)
+- 🐙 **GitHub Repository**: [shagunagg12/TeamMatrix](https://github.com/gauripandey23/TeamMatrix)
+---
+
 ## 📌 Overview
 
-**TeamMatrix** (LearnX) is a next-generation web-based educational platform that delivers **hyper-personalized learning roadmaps**, **interactive AI-generated quizzes**, and **tailored study resources** based on each user's unique background, target schedule, language preference, and knowledge level.
+**TeamMatrix** is a next-generation web-based educational platform that delivers **hyper-personalized learning roadmaps**, **interactive AI-generated quizzes**, and **tailored study resources** based on each user's unique background, target schedule, language preference, and knowledge level.
 
 Whether you're starting from scratch as an *Absolute Beginner* or sharpening your skills as an *Advanced Professional*, TeamMatrix leverages **Google Gemini 3.6 Flash** to curate step-by-step curricula, track your weekly progress, evaluate concept mastery, and seamlessly adapt study plans in real-time.
 
@@ -51,9 +57,9 @@ Whether you're starting from scratch as an *Absolute Beginner* or sharpening you
 
 Watch TeamMatrix in action:
 
-[![Demo Video](http://img.youtube.com/vi/v-dP18RBArc/0.jpg)](https://www.youtube.com/watch?v=v-dP18RBArc "TeamMatrix / LearnX Demo Video")
+(https://www.youtube.com/watch?v=aNwq-aMi46g "TeamMatrix Demo Video")
 
-> 📺 [Click here to watch the full demo on YouTube](https://www.youtube.com/watch?v=v-dP18RBArc)
+> 📺 [Click here to watch the full demo on YouTube](https://www.youtube.com/watch?v=aNwq-aMi46g)
 
 ---
 
@@ -81,7 +87,7 @@ Watch TeamMatrix in action:
 
 TeamMatrix connects a modular **React Single Page Application (SPA)** frontend with a **Flask REST API** backend powered by **Google Gemini 3.6 Flash**.
 
-![Process Flow Diagram](public/process_flow.png)
+![Process Flow Diagram](public/process_flow.jpg)
 
 ### Core User Flow:
 1. **Input Phase**: User specifies a topic, duration, knowledge level, and weekly study hours.

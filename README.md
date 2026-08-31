@@ -62,16 +62,16 @@ Watch TeamMatrix in action:
 <div align="center">
 
 ### 1. Dashboard & Profile Progress
-![Dashboard & Profile](public/image.png)
+![Dashboard & Profile](public/image-3.png)
 
 ### 2. Personalized Learning Roadmap View
 ![Roadmap View](public/image-1.png)
 
 ### 3. Topic Input & Configuration
-![Topic Input](public/image-2.png)
+![Topic Input](public/image.png)
 
 ### 4. Interactive Quiz & Assessment
-![Quiz Interface](public/image-3.png)
+![Quiz Interface](public/image-2.png)
 
 </div>
 
@@ -248,5 +248,5 @@ Feel free to check out the [issues page](https://github.com/shagunagg12/TeamMatr
 Distributed under the MIT License. See `LICENSE` for more information.
 
 <div align="center">
-  <sub>Built with ❤️ by Team Matrix for the Humanaize EdTech Hackathon.</sub>
+  <sub>Built with ❤️ by Team Matrix for the HCL Amplified Hackathon.</sub>
 </div>

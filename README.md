@@ -1,258 +1,777 @@
-# 🎓 TeamMatrix — AI-Powered Personalized Learning Platform
+# 🎓 TeamMatrix
 
 <div align="center">
 
-  <img src="public/logo.png" alt="TeamMatrix Logo" width="400" />
+<img src="public/logo.png" alt="TeamMatrix Logo" width="300"/>
 
-  ### *Learn Anything, Anytime — Customized to Your Goals, Pace, & Language.*
+## AI-Powered Personalized Learning Platform
 
-  [![React](https://img.shields.io/badge/Frontend-React%2018-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
-  [![Flask](https://img.shields.io/badge/Backend-Flask%203.0-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.org/)
-  [![Gemini AI](https://img.shields.io/badge/AI%20Engine-Gemini%203.6%20Flash-8E44AD?style=for-the-badge&logo=googlecloud&logoColor=white)](https://ai.google.dev/)
-  [![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
+**Turn your learning goals into a personalized roadmap, learn with AI-generated resources, test your knowledge, and track your progress — all in one place.**
 
-  [**Demo Video**](#-demo-video) • [**GitHub Repository**](https://github.com/shagunagg12/TeamMatrix) • [**Features**](#-key-features) • [**Getting Started**](#-getting-started) • [**API Reference**](#-api-endpoints)
+<br/>
+
+<a href="https://teammatrix-y4v9.onrender.com/">
+  <img src="https://img.shields.io/badge/🚀%20LIVE%20DEMO-Visit%20TeamMatrix-6C63FF?style=for-the-badge" alt="Live Demo"/>
+</a>
+
+<a href="https://github.com/Ashish-bytes/TeamMatrix">
+  <img src="https://img.shields.io/badge/💻%20SOURCE%20CODE-GitHub-181717?style=for-the-badge&logo=github" alt="GitHub"/>
+</a>
+
+<a href="https://www.youtube.com/watch?v=aNwq-aMi46g">
+  <img src="https://img.shields.io/badge/▶️%20DEMO%20VIDEO-YouTube-FF0000?style=for-the-badge&logo=youtube" alt="Demo Video"/>
+</a>
+
+<br/><br/>
+
+![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square\&logo=react\&logoColor=black)
+![Flask](https://img.shields.io/badge/Flask-3.0-000000?style=flat-square\&logo=flask\&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=flat-square\&logo=python\&logoColor=white)
+![Google Gemini](https://img.shields.io/badge/Google%20Gemini-AI-8E44AD?style=flat-square\&logo=google)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
 </div>
 
 ---
 
-## 🔗 Project Links
+## 🌐 Live Project
 
-- 📹 **Demo Video**: [Watch Demo on YouTube](https://www.youtube.com/watch?v=aNwq-aMi46g)
-- 🐙 **GitHub Repository**: [shagunagg12/TeamMatrix](https://github.com/gauripandey23/TeamMatrix)
----
+### 🚀 Try TeamMatrix
 
-## 📌 Overview
+**Live Application:**
+https://teammatrix-y4v9.onrender.com/
 
-**TeamMatrix** is a next-generation web-based educational platform that delivers **hyper-personalized learning roadmaps**, **interactive AI-generated quizzes**, and **tailored study resources** based on each user's unique background, target schedule, language preference, and knowledge level.
+TeamMatrix is deployed as a full-stack web application with a React frontend and Flask backend.
 
-Whether you're starting from scratch as an *Absolute Beginner* or sharpening your skills as an *Advanced Professional*, TeamMatrix leverages **Google Gemini 3.6 Flash** to curate step-by-step curricula, track your weekly progress, evaluate concept mastery, and seamlessly adapt study plans in real-time.
-
----
-
-## ✨ Key Features
-
-- 🗺️ **Dynamic AI Roadmap Generation**  
-  Enter any topic (e.g., *Machine Learning*, *Quantum Computing*, *Web Development*), specify your timeframe and weekly availability, and receive a weekly structured learning roadmap with time estimates and detailed subtopics.
-
-- 🧠 **Interactive Concept Quizzes**  
-  Test your understanding at the end of subtopics with AI-generated multiple-choice questions complete with instant feedback, scoring, and step-by-step explanation rationales.
-
-- 📚 **Generative AI Study Resources & Tutor**  
-  Generate instant study guides, breakdown of key concepts, step-by-step objectives, common pitfalls, and self-assessment checklists for any subtopic.
-
-- 🌐 **Multilingual Learning Support**  
-  Translate learning roadmaps and study material into your preferred target language on the fly using integrated AI translation.
-
-- ⚡ **Zero-Downtime Offline Fallback Engine**  
-  Equipped with a robust local fallback system that ensures uninterrupted user experience even if API quotas are reached or network connectivity drops.
-
-- 📊 **Progress Analytics & Profile Dashboard**  
-  Monitor your active courses, completed milestones, streak progress, and learning statistics visually with dynamic charts and confetti celebration effects.
+> **Note:** AI-generated functionality depends on the configured Google Gemini API credentials and service availability. The application also includes fallback logic for supported functionality.
 
 ---
 
-## 🎬 Demo Video
+# 📌 About The Project
 
-Watch TeamMatrix in action:
+**TeamMatrix** is an AI-powered personalized learning platform that helps users create structured learning journeys based on their:
 
-(https://www.youtube.com/watch?v=aNwq-aMi46g "TeamMatrix Demo Video")
+* 🎯 Learning goal
+* 📚 Knowledge level
+* ⏱️ Available time
+* 📅 Learning duration
+* 🕐 Weekly study hours
+* 🌍 Preferred language
 
-> 📺 [Click here to watch the full demo on YouTube](https://www.youtube.com/watch?v=aNwq-aMi46g)
+Traditional learning platforms often provide the same curriculum to every learner.
+
+**TeamMatrix takes a different approach.**
+
+It uses AI to transform a learner's individual requirements into a structured roadmap containing topics, subtopics, estimated learning time, study resources, quizzes, and progress tracking.
+
+### The goal
+
+> **Make learning adaptive instead of one-size-fits-all.**
 
 ---
 
-## 🖼️ User Interface & Platform Screenshots
+# ✨ Key Features
+
+## 🗺️ 1. AI-Powered Personalized Roadmaps
+
+Users provide a topic and learning preferences, and TeamMatrix generates a structured learning roadmap.
+
+The roadmap can include:
+
+* Weekly learning plans
+* Topics and subtopics
+* Learning objectives
+* Estimated study time
+* Progressive difficulty
+* Structured learning sequence
+
+**Example:**
+
+```text
+Machine Learning
+       │
+       ├── Week 1
+       │   ├── Python Fundamentals
+       │   ├── NumPy
+       │   └── Pandas
+       │
+       ├── Week 2
+       │   ├── Statistics
+       │   ├── Data Preprocessing
+       │   └── Visualization
+       │
+       ├── Week 3
+       │   ├── Regression
+       │   ├── Classification
+       │   └── Model Evaluation
+       │
+       └── Week 4
+           ├── Advanced Models
+           ├── Projects
+           └── Final Assessment
+```
+
+---
+
+## 🧠 2. AI-Generated Quizzes
+
+Learning doesn't stop at reading.
+
+TeamMatrix generates interactive quizzes for learning topics and subtopics.
+
+Users receive:
+
+* Multiple-choice questions
+* Instant answers
+* Score calculation
+* Answer explanations
+* Learning feedback
+
+This creates a simple learning loop:
+
+```text
+Learn → Practice → Evaluate → Improve
+```
+
+---
+
+## 📚 3. AI Study Resources
+
+Learners can generate focused study material for individual topics.
+
+Resources can include:
+
+* Concept explanations
+* Learning objectives
+* Key points
+* Practical guidance
+* Common mistakes
+* Self-assessment questions
+* Topic summaries
+
+This turns TeamMatrix into an **AI-assisted learning companion**, rather than simply a roadmap generator.
+
+---
+
+## 🌍 4. Multilingual Learning
+
+TeamMatrix supports AI-powered translation of learning content.
+
+Learners can convert roadmap and study material into their preferred language.
+
+This helps reduce language barriers and makes technical learning more accessible.
+
+---
+
+## ⚡ 5. Fallback Learning Engine
+
+AI APIs can sometimes become unavailable because of:
+
+* API limits
+* Network problems
+* Service interruptions
+* Temporary failures
+
+TeamMatrix includes fallback logic for supported AI features so the application can continue providing useful responses instead of completely failing.
+
+```text
+             AI Request
+                  │
+                  ▼
+          ┌───────────────┐
+          │ Gemini API    │
+          └───────┬───────┘
+                  │
+           Success?
+             /       \
+           YES        NO
+           │          │
+           ▼          ▼
+       AI Result   Fallback
+                     Engine
+```
+
+---
+
+## 📊 6. Progress Analytics
+
+The dashboard provides a visual representation of learning activity.
+
+Users can track:
+
+* Active courses
+* Completed topics
+* Learning milestones
+* Progress statistics
+* Learning streaks
+* Quiz performance
+
+The objective is to make progress **visible and motivating**.
+
+---
+
+## 🎨 7. Modern Responsive Interface
+
+The frontend uses a modern glassmorphism-inspired design system with reusable React components.
+
+The interface includes:
+
+* Responsive layouts
+* Interactive cards
+* Learning dashboards
+* Progress visualizations
+* Interactive quizzes
+* Markdown-based learning content
+* Visual completion feedback
+
+---
+
+# 🧠 What Makes TeamMatrix Different?
+
+Most learning platforms focus on providing **content**.
+
+TeamMatrix focuses on providing a **personalized learning journey**.
+
+| Traditional Learning   | TeamMatrix                |
+| ---------------------- | ------------------------- |
+| Fixed curriculum       | AI-generated curriculum   |
+| Same plan for everyone | Personalized roadmap      |
+| Static resources       | AI-generated resources    |
+| Separate assessment    | Integrated quizzes        |
+| Language limitations   | Multilingual support      |
+| Manual planning        | AI-assisted planning      |
+| Basic progress         | Visual learning analytics |
+
+### TeamMatrix's learning philosophy
+
+```text
+                LEARNER
+                   │
+       ┌───────────┼───────────┐
+       ▼           ▼           ▼
+     Goal        Skill       Schedule
+       │           │           │
+       └───────────┼───────────┘
+                   ▼
+              AI ENGINE
+                   │
+                   ▼
+        PERSONALIZED ROADMAP
+                   │
+          ┌────────┼────────┐
+          ▼        ▼        ▼
+       Resources  Quiz   Practice
+          │        │        │
+          └────────┼────────┘
+                   ▼
+             PROGRESS DATA
+                   │
+                   ▼
+             BETTER LEARNING
+```
+
+---
+
+# 🏗️ System Architecture
+
+TeamMatrix follows a modular full-stack architecture.
+
+```text
+┌─────────────────────────────────────────────────┐
+│                   USER                          │
+└───────────────────────┬─────────────────────────┘
+                        │
+                        ▼
+┌─────────────────────────────────────────────────┐
+│              REACT FRONTEND                     │
+│                                                 │
+│  Pages • Components • Router • Charts • UI     │
+└───────────────────────┬─────────────────────────┘
+                        │
+                    HTTP / JSON
+                        │
+                        ▼
+┌─────────────────────────────────────────────────┐
+│               FLASK REST API                    │
+│                                                 │
+│  Roadmap • Quiz • Resources • Translation      │
+└───────────────┬─────────────────┬───────────────┘
+                │                 │
+                ▼                 ▼
+      ┌──────────────────┐  ┌──────────────────┐
+      │ Google Gemini    │  │ Fallback Engine  │
+      │ AI Generation    │  │ Local Responses  │
+      └─────────┬────────┘  └─────────┬────────┘
+                │                     │
+                └──────────┬──────────┘
+                           ▼
+                ┌─────────────────────┐
+                │ Personalized        │
+                │ Learning Experience │
+                └─────────────────────┘
+```
+
+---
+
+# 🔄 Application Workflow
+
+### Step 1 — Define Learning Goal
+
+The learner enters:
+
+```text
+Topic
+Knowledge Level
+Learning Duration
+Weekly Study Hours
+Preferred Language
+```
+
+### Step 2 — Generate Roadmap
+
+The Flask backend sends the request to the AI generation layer.
+
+### Step 3 — Personalized Curriculum
+
+The AI generates a structured learning roadmap.
+
+### Step 4 — Learn
+
+The learner follows the roadmap and accesses AI-generated study resources.
+
+### Step 5 — Practice
+
+The learner completes interactive quizzes.
+
+### Step 6 — Track
+
+The dashboard visualizes learning progress and completed milestones.
+
+---
+
+# 🛠️ Technology Stack
+
+| Category              | Technology                  |
+| --------------------- | --------------------------- |
+| **Frontend**          | React 18                    |
+| **Routing**           | React Router DOM 6          |
+| **API Communication** | Axios                       |
+| **Backend**           | Python + Flask 3            |
+| **AI**                | Google Gemini API           |
+| **Charts**            | Chart.js + React Chart.js 2 |
+| **Markdown**          | React Markdown              |
+| **Icons**             | Lucide React                |
+| **Styling**           | Custom CSS / Glassmorphism  |
+| **Configuration**     | python-dotenv               |
+| **CORS**              | Flask-CORS                  |
+| **Production Server** | Gunicorn                    |
+| **Deployment**        | Render                      |
+
+---
+
+# 📸 Application Preview
 
 <div align="center">
 
-### 1. Dashboard & Profile Progress
-![Dashboard & Profile](public/image-3.png)
+## 📊 Dashboard
 
-### 2. Personalized Learning Roadmap View
-![Roadmap View](public/image-1.png)
+<img src="public/image-3.png" alt="TeamMatrix Dashboard" width="900"/>
 
-### 3. Topic Input & Configuration
-![Topic Input](public/image.png)
+---
 
-### 4. Interactive Quiz & Assessment
-![Quiz Interface](public/image-2.png)
+## 🗺️ Personalized Roadmap
+
+<img src="public/image-1.png" alt="TeamMatrix Personalized Roadmap" width="900"/>
+
+---
+
+## ⚙️ Learning Configuration
+
+<img src="public/image.png" alt="TeamMatrix Learning Configuration" width="900"/>
+
+---
+
+## 🧠 Interactive Quiz
+
+<img src="public/image-2.png" alt="TeamMatrix Quiz" width="900"/>
 
 </div>
 
 ---
 
-## 🏗️ System Architecture & Workflow
+# 🎬 Demo Video
 
-TeamMatrix connects a modular **React Single Page Application (SPA)** frontend with a **Flask REST API** backend powered by **Google Gemini 3.6 Flash**.
+Watch the complete TeamMatrix workflow:
 
-![Process Flow Diagram](public/processflow.jpg)
+<div align="center">
 
-### Core User Flow:
-1. **Input Phase**: User specifies a topic, duration, knowledge level, and weekly study hours.
-2. **AI Processing**: Flask backend requests Gemini 3.6 Flash to format structured JSON curricula (or uses local fallback engines).
-3. **Interactive Learning**: User navigates topics, requests AI study resources, and completes interactive assessments.
-4. **Adaptive Feedback**: Quiz performance updates completion state and triggers visual progress tracking.
+### ▶️ TeamMatrix Demo
 
----
+https://www.youtube.com/watch?v=aNwq-aMi46g
 
-## 🛠️ Tech Stack
-
-| Domain | Technologies Used |
-| :--- | :--- |
-| **Frontend** | React 18, React Router DOM v6, Axios, Lucide React, Chart.js (`react-chartjs-2`), React Confetti Explosion, React Markdown, CSS3 |
-| **Backend** | Python 3, Flask 3.0, Flask-CORS, `python-dotenv` |
-| **AI & LLM** | Google Gemini 3.6 Flash (`google-generativeai` SDK), Custom Fallback Engine |
-| **Styling & Assets** | Custom Glassmorphic CSS Design System, Responsive Components |
+</div>
 
 ---
 
-## 🚀 Getting Started
+# 📡 API Reference
 
-Follow these steps to set up TeamMatrix locally on your machine.
+TeamMatrix exposes REST endpoints through the Flask backend.
 
-### Prerequisites
-- **Node.js** (v16.0 or higher) & **npm**
-- **Python** (v3.9 or higher) & `pip`
-- **Google Gemini API Key** (Get your free key at [Google AI Studio](https://ai.google.dev/aistudio))
+| Endpoint                 | Method | Description                            |
+| ------------------------ | ------ | -------------------------------------- |
+| `/api/roadmap`           | `POST` | Generate personalized learning roadmap |
+| `/api/quiz`              | `POST` | Generate interactive quiz              |
+| `/api/generate-resource` | `POST` | Generate study resources               |
+| `/api/translate`         | `POST` | Translate learning content             |
 
 ---
 
-### 1. Clone the Repository
+## Example API Request
+
+### Generate Roadmap
+
+```json
+{
+  "topic": "Machine Learning",
+  "time": "4 weeks",
+  "knowledge_level": "Beginner"
+}
+```
+
+### Generate Quiz
+
+```json
+{
+  "course": "Python",
+  "topic": "Functions",
+  "subtopic": "Lambda",
+  "description": "Learn lambda expressions and their practical use."
+}
+```
+
+### Generate Study Resource
+
+```json
+{
+  "course": "Machine Learning",
+  "knowledge_level": "Beginner",
+  "description": "Introduction to supervised learning",
+  "time": "3h"
+}
+```
+
+### Translate Content
+
+```json
+{
+  "textArr": [
+    "Hello",
+    "Welcome"
+  ],
+  "toLang": "Spanish"
+}
+```
+
+---
+
+# 📁 Project Structure
+
+```text
+TeamMatrix/
+│
+├── backend/
+│   ├── base.py
+│   ├── roadmap.py
+│   ├── quiz.py
+│   ├── generativeResources.py
+│   ├── translate.py
+│   └── requirements.txt
+│
+├── public/
+│   ├── logo.png
+│   ├── image.png
+│   ├── image-1.png
+│   ├── image-2.png
+│   ├── image-3.png
+│   └── processflow.jpg
+│
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── App.js
+│   ├── index.js
+│   └── index.css
+│
+├── package.json
+├── package-lock.json
+└── README.md
+```
+
+---
+
+# 🚀 Getting Started
+
+## Prerequisites
+
+Make sure you have:
+
+* Node.js 16+
+* npm
+* Python 3.9+
+* pip
+* Google Gemini API key
+
+---
+
+## 1. Clone the Repository
+
 ```bash
-git clone https://github.com/shagunagg12/TeamMatrix.git
+git clone https://github.com/Ashish-bytes/TeamMatrix.git
+
 cd TeamMatrix
 ```
 
 ---
 
-### 2. Backend Setup
+## 2. Setup Backend
 
-1. Navigate to the backend directory:
-   ```bash
-   cd backend
-   ```
-
-2. Create and activate a Python virtual environment:
-   - **Windows:**
-     ```powershell
-     python -m venv humanaize
-     .\humanaize\Scripts\activate
-     ```
-   - **macOS / Linux:**
-     ```bash
-     python3 -m venv humanaize
-     source humanaize/bin/activate
-     ```
-
-3. Install required Python packages:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. Create a `.env` file inside the `./backend` directory:
-   ```env
-   GEMINI_API_KEY=your_gemini_api_key_here
-   ```
-
-5. Return to the root directory:
-   ```bash
-   cd ..
-   ```
-
----
-
-### 3. Frontend Setup
-
-1. Install frontend dependencies in the project root:
-   ```bash
-   npm install
-   ```
-
----
-
-### 4. Running the Application
-
-Start both the backend server and frontend server:
-
-#### Terminal 1: Backend Server (Flask)
-```bash
-npm run backend
-# Starts backend server at http://localhost:5000
-```
-*Alternatively:*
 ```bash
 cd backend
+
+python -m venv humanaize
+```
+
+### Windows
+
+```powershell
+.\humanaize\Scripts\activate
+```
+
+### macOS / Linux
+
+```bash
+source humanaize/bin/activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 3. Configure Environment Variables
+
+Create:
+
+```text
+backend/.env
+```
+
+Add:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+> Never commit your actual API key to GitHub.
+
+---
+
+## 4. Install Frontend Dependencies
+
+From the project root:
+
+```bash
+cd ..
+
+npm install
+```
+
+---
+
+## 5. Start Backend
+
+Open Terminal 1:
+
+```bash
+cd backend
+
 python base.py
 ```
 
-#### Terminal 2: Frontend Server (React)
+Backend:
+
+```text
+http://localhost:5000
+```
+
+---
+
+## 6. Start Frontend
+
+Open Terminal 2:
+
 ```bash
 npm start
-# Starts frontend app at http://localhost:3000
+```
+
+Frontend:
+
+```text
+http://localhost:3000
 ```
 
 ---
 
-## 📡 API Endpoints
+# 🔐 Environment Configuration
 
-The Flask backend provides RESTful JSON endpoints:
+TeamMatrix uses environment variables to keep sensitive configuration outside the source code.
 
-| Endpoint | Method | Payload Example | Description |
-| :--- | :--- | :--- | :--- |
-| `/api/roadmap` | `POST` | `{"topic": "Machine Learning", "time": "4 weeks", "knowledge_level": "Beginner"}` | Returns weekly roadmap JSON with subtopics & descriptions |
-| `/api/quiz` | `POST` | `{"course": "Python", "topic": "Functions", "subtopic": "Lambda", "description": "..."}` | Generates 5 multiple-choice quiz questions with answer rationale |
-| `/api/generate-resource` | `POST` | `{"course": "ML", "knowledge_level": "Beginner", "description": "...", "time": "3h"}` | Generates markdown learning study guide and tutor resources |
-| `/api/translate` | `POST` | `{"textArr": ["Hello", "Welcome"], "toLang": "Spanish"}` | Translates list of strings into target language |
+Example:
 
----
-
-## 📁 Repository Structure
-
-```
-TeamMatrix/
-├── backend/
-│   ├── base.py                 # Flask API routes & CORS handling
-│   ├── roadmap.py              # Gemini AI roadmap generator & offline fallback
-│   ├── quiz.py                 # Gemini AI quiz generator & fallback questions
-│   ├── generativeResources.py  # AI study guide tutor generator
-│   ├── translate.py            # Multilingual AI translation module
-│   └── requirements.txt        # Python backend dependencies
-├── public/                     # Static assets, branding logo & screenshots
-│   ├── logo.png
-│   ├── process_flow.png
-│   ├── image.png - image-3.png
-│   └── index.html
-├── src/
-│   ├── components/             # Reusable UI components (Headers, Loaders, Modals)
-│   ├── pages/                  # Main views (Input Topic, Roadmap, Quiz, Profile)
-│   ├── App.js                  # Application root
-│   ├── index.js                # React Router setup & entry point
-│   └── index.css               # Global styles & design system
-├── package.json                # React project config & scripts
-└── README.md                   # Project documentation
+```env
+GEMINI_API_KEY=your_api_key_here
 ```
 
+### Security best practices
+
+Never commit:
+
+```text
+.env
+API keys
+Access tokens
+Private credentials
+```
+
+Make sure sensitive files are included in `.gitignore`.
+
 ---
 
-## 🤝 Contributing
+# ☁️ Deployment
 
-Contributions, issues, and feature requests are welcome!  
-Feel free to check out the [issues page](https://github.com/shagunagg12/TeamMatrix/issues).
+The project is currently deployed on **Render**.
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+### Production Application
+
+🚀 https://teammatrix-y4v9.onrender.com/
+
+### Deployment Architecture
+
+```text
+                   GitHub
+                     │
+                     ▼
+              ┌─────────────┐
+              │   Render    │
+              └──────┬──────┘
+                     │
+          ┌──────────┴──────────┐
+          ▼                     ▼
+     React Frontend        Flask Backend
+                                │
+                                ▼
+                         Gemini API
+```
 
 ---
 
-## 📄 License
+# 🔮 Future Roadmap
 
-Distributed under the MIT License. See `LICENSE` for more information.
+TeamMatrix can be extended into a more complete personalized learning ecosystem.
+
+### Planned Improvements
+
+* 👤 User authentication
+* 💾 Persistent database storage
+* 📚 Personal course library
+* 🧠 Adaptive difficulty based on quiz performance
+* 🔁 Spaced repetition
+* 📅 Personalized revision schedules
+* 🔔 Learning reminders
+* 🏆 Gamification and achievements
+* 📈 Advanced learner analytics
+* 🧪 Automated testing
+* 🐳 Docker support
+* ⚙️ CI/CD pipeline
+* 🔐 Improved API security
+* 🤖 More advanced AI tutoring capabilities
+
+---
+
+# 🤝 Contributing
+
+Contributions, suggestions, bug reports, and feature requests are welcome.
+
+### Fork the repository
+
+```bash
+git clone https://github.com/Ashish-bytes/TeamMatrix.git
+cd TeamMatrix
+```
+
+### Create a feature branch
+
+```bash
+git checkout -b feature/your-feature
+```
+
+### Commit your changes
+
+```bash
+git add .
+
+git commit -m "feat: add your feature"
+```
+
+### Push your branch
+
+```bash
+git push origin feature/your-feature
+```
+
+Then open a Pull Request.
+
+---
+
+# 📄 License
+
+This project is licensed under the **MIT License**.
+
+See the [`LICENSE`](LICENSE) file for more information.
+
+---
+
+# 👨‍💻 Project
 
 <div align="center">
-  <sub>Built with ❤️ by Team Matrix for the HCL Amplified Hackathon.</sub>
+
+## TeamMatrix
+
+### AI-powered learning. Personalized for you.
+
+<br/>
+
+🚀 **Live Demo**
+
+https://teammatrix-y4v9.onrender.com/
+
+<br/>
+
+💻 **GitHub Repository**
+
+https://github.com/Ashish-bytes/TeamMatrix
+
+<br/>
+
+🎬 **Demo Video**
+
+https://www.youtube.com/watch?v=aNwq-aMi46g
+
+<br/><br/>
+
+**Built with ❤️ using React, Flask, Python & Google Gemini**
+
 </div>
